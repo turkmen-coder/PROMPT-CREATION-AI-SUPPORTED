@@ -1,150 +1,150 @@
 # 🚀 NEXUS AI Studio
 
-Modern AI Assistant ve Prompt Builder arayüzü. Claude, OpenAI ve Gemini desteği ile güçlendirilmiş.
+Modern AI Assistant and Prompt Builder interface. Powered by Claude, OpenAI, and Gemini.
 
-## ✨ Özellikler
+## ✨ Features
 
-### 🏠 **Studio (Ana Sayfa)**
-- Modern hoş geldin ekranı
-- Animasyonlu arka plan efektleri
-- Hızlı navigasyon
+### 🏠 **Studio (Home)**
+- Modern welcome screen
+- Animated background effects
+- Quick navigation
 
 ### 🔧 **Prompt Builder**
-- İnteraktif prompt oluşturma
-- Gerçek zamanlı ipuçları ve öneriler
-- Form tamamlanma takibi
-- Akıllı optimizasyon tavsiyeleri
+- Interactive prompt creation
+- Real-time tips and suggestions
+- Form completion tracking
+- Smart optimization recommendations
 
-### 📚 **Template Sistemi**
-- Önceden tanımlanmış AI rolü şablonları
-- Template önizleme
-- Otomatik form doldurma
+### 📚 **Template System**
+- Predefined AI role templates
+- Template preview
+- Automatic form filling
 
 ### 💬 **Chat Interface**
-- 3 AI Provider desteği (OpenAI, Gemini, Claude)
-- Test modu - API key olmadan deneme
-- Gerçek zamanlı sohbet
-- Mesaj reactions ve kopyalama
+- 3 AI Provider support (OpenAI, Gemini, Claude)
+- Test mode - Test without an API key
+- Real-time chat
+- Message reactions and copying
 
-### ⚙️ **Ayarlar**
-- Güvenli API key yönetimi
-- Test modu kurulumu
-- Model parametreleri (temperature, tokens)
-- Local storage ile güvenli saklama
+### ⚙️ **Settings**
+- Secure API key management
+- Test mode setup
+- Model parameters (temperature, tokens)
+- Secure storage with local storage
 
-## 🛠️ Kurulum
+## 🛠️ Installation
 
 ```bash
-# Depoyu klonla
+# Repository clone
 git clone <repo-url>
 cd NEXUS-PROMPT-0.1-main
 
-# Bağımlılıkları yükle
+# Install dependencies
 npm install
 
-# Geliştirme sunucusunu başlat
+# Start the development server
 npm run dev
 ```
 
-## 📁 Proje Yapısı
+## 📁 Project Structure
 
 ```
 src/
-├── components/          # React bileşenleri
-│   ├── ui/             # Temel UI bileşenleri
-│   ├── ChatInterface.tsx
-│   ├── FunctionalPromptBuilder.tsx
-│   ├── SimpleSettings.tsx
-│   ├── TemplateSelector.tsx
-│   ├── EnhancedHeroSection.tsx
-│   └── ...
-├── lib/                # Yardımcı kütüphaneler
-│   ├── apiService.ts   # AI API entegrasyonu
-│   ├── templates.ts    # Template tanımları
-│   └── ...
-├── styles/             # CSS dosyaları
-└── App.tsx             # Ana uygulama
+├── components/ # React components
+│ ├── ui/ # Core UI components
+│ ├── ChatInterface.tsx
+│ ├── FunctionalPromptBuilder.tsx
+│ ├── SimpleSettings.tsx
+│ ├── TemplateSelector.tsx
+│ ├── EnhancedHeroSection.tsx
+│ └── ...
+├── lib/ # Helper libraries
+│ ├── apiService.ts # AI API integration
+│ ├── templates.ts # Template definitions
+│ └── ...
+├── styles/ # CSS files
+└── App.tsx # Main application
 ```
 
-## 🔑 API Key Kurulumu
+## 🔑 API Key Setup
 
-### Test Modu (Hızlı Başlangıç)
-1. **Ayarlar** sekmesine git
-2. **"🚀 Test API Key'leri Ekle"** butonuna tık
-3. **Chat** sekmesinde test et!
+### Test Mode (Quick Start)
+1. Go to the **Settings** tab
+2. Click the **"🚀 Add Test API Keys"** button
+3. Test in the **Chat** tab!
 
-### Gerçek API Kullanımı
+### Actual API Usage
 
 #### OpenAI
-1. [platform.openai.com](https://platform.openai.com) adresine git
-2. API key oluştur
-3. Ayarlar → OpenAI API Key alanına yapıştır
+1. Go to [platform.openai.com](https://platform.openai.com)
+2. Generate API Key
+3. Paste into Settings → OpenAI API Key
 
 #### Google Gemini
-1. [ai.google.dev](https://ai.google.dev) adresine git  
-2. API key oluştur
-3. Ayarlar → Gemini API Key alanına yapıştır
+1. Go to [ai.google.dev](https://ai.google.dev)
+2. Generate API Key
+3. Paste into Settings → Gemini API Key
 
 #### Claude (Anthropic)
-1. [console.anthropic.com](https://console.anthropic.com) adresine git
-2. API key oluştur
-3. Ayarlar → Claude API Key alanına yapıştır
+1. Go to [console.anthropic.com](https://console.anthropic.com)
+2. Generate API Key
+3. Paste into Settings → Claude API Key
 
-## 🚀 Kullanım
+## 🚀 Usage
 
-1. **Studio**: Ana sayfa ve genel bakış
-2. **Builder**: Kendi promptlarını oluştur
-3. **Templates**: Hazır rollerden seç
-4. **Chat**: AI ile sohbet et
-5. **Ayarlar**: API ayarlarını yönet
+1. **Studio**: Homepage and overview
+2. **Builder**: Create your own prompts
+3. **Templates**: Choose from pre-made roles
+4. **Chat**: Chat with the AI
+5. **Settings**: Configure API settings Manage
 
-## 🎯 Özellik Detayları
+## 🎯 Feature Details
 
-### İnteraktif İpuçları
-- Form doldururken gerçek zamanlı öneriler
-- Domain bazlı spesifik tavsiyeler
-- Progress tracking ile tamamlanma takibi
-- Kopyalanabilir akıllı öneriler
+### Interactive Tips
+- Real-time suggestions when filling out forms
+- Domain-specific suggestions
+- Completion tracking with progress tracking
+- Copyable smart suggestions
 
-### API Entegrasyonu
-- Otomatik fallback sistemi
-- Hata yönetimi ve kullanıcı dostu mesajlar
-- Test modu ile güvenli deneme
-- Local storage ile güvenli key saklama
+### API Integration
+- Automatic fallback system
+- Error management and user-friendly messages
+- Safe testing with test mode
+- Secure key storage with local storage
 
 ### Modern UI/UX
-- Responsive tasarım
-- NEXUS tema ile gradient efektler
-- Smooth animasyonlar
-- Dark mode optimizasyonu
+- Responsive design
+- Gradient effects with the NEXUS theme
+- Smooth animations
+- Dark mode optimization
 
-## 🔧 Teknolojiler
+## 🔧 Technologies
 
 - **React 18** - Modern React hooks
-- **TypeScript** - Tip güvenliği
+- **TypeScript** - Type safety
 - **Tailwind CSS** - Utility-first CSS
-- **Vite** - Hızlı build tool
+- **Vite** - Rapid build tool
 - **Radix UI** - Accessible components
 
-## 📄 Lisans
+## 📄 License
 
-MIT License - Detaylar için [LICENSE](LICENSE) dosyasını inceleyin.
+MIT License - See [LICENSE] for details.
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-1. Fork'layın
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Commit'leyin (`git commit -m 'Add amazing feature'`)
-4. Push'layın (`git push origin feature/amazing-feature`)
-5. Pull Request açın
+1. Fork
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit (`git commit -m 'Add amazing feature'`)
+4. Push (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 🆘 Destek
+## 🆘 Support
 
-Sorularınız için:
-- Issues bölümü
-- Documentation inceleme
-- Test modu ile deneme
+For questions:
+- Issues section
+- Documentation review
+- Test mode
 
 ---
 
-**🎉 NEXUS AI Studio ile modern AI deneyimi yaşayın!**
+**🎉 Experience modern AI with NEXUS AI Studio!**
