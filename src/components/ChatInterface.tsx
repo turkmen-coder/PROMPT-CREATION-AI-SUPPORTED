@@ -32,10 +32,10 @@ interface Message {
 }
 
 const quickSuggestions = [
-  'Python fonksiyonu yaz',
-  'Veri analizi yap', 
-  'Pazarlama planı oluştur',
-  'Kod optimizasyonu'
+  'Write Python function',
+  'Analyze data', 
+  'Create marketing plan',
+  'Code optimization'
 ];
 
 export function ChatInterface() {
@@ -47,7 +47,7 @@ export function ChatInterface() {
       return [{
         id: '1',
         type: 'error',
-        content: '⚠️ API Key gerekli! NEXUS AI\'yi kullanmak için lütfen Ayarlar bölümünden en az bir API key girin (OpenAI, Gemini veya Claude).',
+        content: '⚠️ API Key required! To use NEXUS AI, please enter at least one API key (OpenAI, Gemini or Claude) from the Settings section.',
         timestamp: new Date(),
         error: true
       }];
@@ -56,7 +56,7 @@ export function ChatInterface() {
     return [{
       id: '1',
       type: 'ai',
-      content: 'Merhaba! Ben NEXUS AI asistanınız. Size nasıl yardımcı olabilirim? 🚀',
+      content: 'Hello! I am your NEXUS AI assistant. How can I help you? 🚀',
       timestamp: new Date(),
     }];
   });
@@ -113,7 +113,7 @@ export function ChatInterface() {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'error',
-        content: `❌ Bir hata oluştu: ${error instanceof Error ? error.message : 'Bilinmeyen hata'}`,
+        content: `❌ An error occurred: ${error instanceof Error ? error.message : 'Unknown error'}`,
         timestamp: new Date(),
         error: true
       };
@@ -136,7 +136,7 @@ export function ChatInterface() {
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   };
 
   return (
@@ -158,7 +158,7 @@ export function ChatInterface() {
                   }`}></span>
                   {currentProvider !== 'auto' ? currentProvider : 
                     getAPISettings().openaiApiKey || getAPISettings().geminiApiKey || getAPISettings().claudeApiKey 
-                      ? 'AI Hazır' : 'API Key Gerekli'
+                      ? 'AI Ready' : 'API Key Required'
                   }
                 </p>
               </div>
@@ -306,7 +306,7 @@ export function ChatInterface() {
               </Button>
             </div>
             <Textarea
-              placeholder="Mesajınızı yazın..."
+              placeholder="Type your message..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {

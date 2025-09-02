@@ -28,12 +28,12 @@ const categoryIcons = {
 }
 
 const categoryNames = {
-  technical: 'Teknik Roller',
-  business: 'İş Dünyası',
-  creative: 'Yaratıcı Sanatlar',
-  education: 'Eğitim',
-  health: 'Sağlık & Yaşam',
-  entertainment: 'Eğlence & Oyunlar'
+  technical: 'Technical Roles',
+  business: 'Business',
+  creative: 'Creative Arts',
+  education: 'Education',
+  health: 'Health & Lifestyle',
+  entertainment: 'Entertainment & Games'
 }
 
 export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
@@ -46,9 +46,9 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
   return (
     <div className="nexus-neon-card rounded-lg overflow-hidden">
       <div className="p-6 border-b border-purple-400/30">
-        <h3 className="text-xl font-semibold text-white mb-2 nexus-gradient-text">Template Seçici</h3>
+        <h3 className="text-xl font-semibold text-white mb-2 nexus-gradient-text">Template Selector</h3>
         <p className="text-gray-300">
-          İhtiyacınıza uygun AI asistan rolünü seçin ve hazır prompt'lar alın
+          Choose the AI assistant role that suits your needs and get ready-made prompts
         </p>
       </div>
 
@@ -90,7 +90,7 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
                   <CardContent>
                     <div className="flex flex-wrap gap-2 mb-4">
                       <Badge variant="secondary" className="text-xs bg-purple-600/20 text-purple-300 border-purple-500/30">
-                        {template.taskType === 'analysis' ? 'Analiz' : 'Üretim'}
+                        {template.taskType === 'analysis' ? 'Analysis' : 'Generation'}
                       </Badge>
                       <Badge variant="outline" className="text-xs border-pink-500/30 text-pink-300">
                         {template.tone}
@@ -101,16 +101,16 @@ export function TemplateSelector({ onSelectTemplate }: TemplateSelectorProps) {
                     </div>
                     <div className="space-y-2">
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        <strong className="text-purple-400">Bağlam:</strong> {template.context}
+                        <strong className="text-purple-400">Context:</strong> {template.context}
                       </p>
                       <p className="text-xs text-gray-400 leading-relaxed">
-                        <strong className="text-pink-400">Kısıtlar:</strong> {template.constraints}
+                        <strong className="text-pink-400">Constraints:</strong> {template.constraints}
                       </p>
                     </div>
                     <div className="mt-4 pt-3 border-t border-purple-400/20">
                       <p className="text-xs text-green-400 font-medium flex items-center gap-1">
                         <Wand2 className="w-3 h-3" />
-                        Tıklayın → Otomatik Prompt Hazırlansın
+                        Click → Auto-Generate Prompt
                       </p>
                     </div>
                   </CardContent>

@@ -39,26 +39,26 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
   const [liveTips, setLiveTips] = useState([]);
   const [completionProgress, setCompletionProgress] = useState(0);
 
-  // Form completion progress hesaplama
+  // Calculate form completion progress
   useEffect(() => {
     const fields = Object.values(formData);
     const filledFields = fields.filter(field => field.trim() !== '');
     setCompletionProgress(Math.round((filledFields.length / fields.length) * 100));
   }, [formData]);
 
-  // Form değişikliklerini takip et ve canlı ipuçları oluştur
+  // Track form changes and generate live tips
   useEffect(() => {
     const generateLiveTips = () => {
       const tips = [];
       
-      // Domain bazlı anında ipuçları
+      // Domain-based instant tips
       if (formData.domain && !formData.objective.trim()) {
         const domainSuggestions = {
-          'Yazılım Geliştirme': 'Hangi teknoloji ile geliştirmek istiyorsunuz? (React, Python, etc.)',
-          'Pazarlama': 'Hangi kanal için içerik oluşturacaksınız? (Social media, email, web)',
-          'Eğitim': 'Hangi yaş grubu ve seviye için eğitim materyali hazırlayacaksınız?',
-          'Sağlık': 'Hangi sağlık alanında bilgi veya içerik üreteceksiniz?',
-          'Finans': 'Hangi finansal konu veya analiz türü ile ilgili çalışacaksınız?'
+          'Software Development': 'Which technology do you want to develop with? (React, Python, etc.)',
+          'Marketing': 'Which channel will you create content for? (Social media, email, web)',
+          'Education': 'Which age group and level will you prepare educational material for?',
+          'Health': 'Which health area will you produce information or content for?',
+          'Finance': 'Which financial topic or analysis type will you work with?'
         };
         if (domainSuggestions[formData.domain]) {
           tips.push({
@@ -69,12 +69,12 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
         }
       }
       
-      // Hedef + objective kombinasyonu için ipuçları
+      // Tips for target + objective combination
       if (formData.domain && formData.objective.trim() && !formData.technique) {
         const techniqueSuggestions = {
-          'Yazılım Geliştirme': 'Kod geliştirme için "Chain of Thought" tekniği önerilir',
-          'Pazarlama': 'Yaratıcı içerik için "Role Playing" tekniği etkili olabilir',
-          'Eğitim': 'Öğretim için "Few-Shot Learning" ile örnekler verin'
+          'Software Development': '"Chain of Thought" technique is recommended for code development',
+          'Marketing': '"Role Playing" technique can be effective for creative content',
+          'Education': 'Use "Few-Shot Learning" with examples for teaching'
         };
         if (techniqueSuggestions[formData.domain]) {
           tips.push({
@@ -85,20 +85,20 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
         }
       }
       
-      // Context eksikse uyarı
+      // Warning if context is missing
       if (formData.domain && formData.objective.trim() && !formData.context.trim()) {
         tips.push({
           type: 'warning',
-          message: 'Bağlam bilgisi eklemek prompt kalitesini artıracak',
+          message: 'Adding context information will improve prompt quality',
           priority: 'medium'
         });
       }
       
-      // Form tamamlanma durumu
+      // Form completion status
       if (completionProgress >= 70 && !generatedPrompt) {
         tips.push({
           type: 'ready',
-          message: 'Form neredeyse tamamlandı! Prompt oluşturmaya hazır.',
+          message: 'Form is almost complete! Ready to generate prompt.',
           priority: 'high'
         });
       }
@@ -109,7 +109,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
     generateLiveTips();
   }, [formData, completionProgress, generatedPrompt]);
 
-  // Template seçildiğinde form verilerini otomatik doldur
+  // Auto-fill form data when template is selected
   useEffect(() => {
     if (selectedTemplate) {
       setFormData({
@@ -122,7 +122,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
         tone: selectedTemplate.tone
       });
       
-      // Template seçildiğinde otomatik prompt oluştur
+      // Auto-generate prompt when template is selected
       setTimeout(() => {
         generatePromptFromTemplate();
       }, 500);
@@ -131,22 +131,22 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
 
   const getDomainFromTemplate = (template: Template & { id: string }) => {
     const role = template.role.toLowerCase();
-    if (role.includes('yazılım') || role.includes('kod') || role.includes('developer')) return 'Yazılım Geliştirme';
-    if (role.includes('pazarlama') || role.includes('marketing')) return 'Pazarlama';
-    if (role.includes('eğitim') || role.includes('öğretmen')) return 'Eğitim';
-    if (role.includes('sağlık') || role.includes('doktor')) return 'Sağlık';
-    if (role.includes('finans') || role.includes('mali')) return 'Finans';
-    if (role.includes('analiz') || role.includes('veri')) return 'Analitik';
-    if (role.includes('yaratıcı') || role.includes('tasarım')) return 'Yaratıcı İçerik';
-    return 'İş Geliştirme';
+    if (role.includes('software') || role.includes('code') || role.includes('developer')) return 'Software Development';
+    if (role.includes('marketing') || role.includes('marketing')) return 'Marketing';
+    if (role.includes('education') || role.includes('teacher')) return 'Education';
+    if (role.includes('health') || role.includes('doctor')) return 'Health';
+    if (role.includes('finance') || role.includes('financial')) return 'Finance';
+    if (role.includes('analysis') || role.includes('data')) return 'Analytics';
+    if (role.includes('creative') || role.includes('design')) return 'Creative Content';
+    return 'Business Development';
   };
 
   const getAudienceFromTemplate = (template: Template & { id: string }) => {
     const tone = template.tone.toLowerCase();
-    if (tone.includes('başlangıç') || tone.includes('basit')) return 'Başlangıç';
-    if (tone.includes('ileri') || tone.includes('uzman')) return 'İleri';
-    if (tone.includes('orta')) return 'Orta';
-    return 'Orta';
+    if (tone.includes('beginner') || tone.includes('simple')) return 'Beginner';
+    if (tone.includes('advanced') || tone.includes('expert')) return 'Advanced';
+    if (tone.includes('intermediate')) return 'Intermediate';
+    return 'Intermediate';
   };
 
   const getTechniqueFromTemplate = (template: Template & { id: string }) => {
@@ -157,7 +157,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
   const generatePromptFromTemplate = () => {
     setIsGenerating(true);
     setTimeout(() => {
-      // Template'dan gelen veriler için doğrudan prompt oluştur
+      // Generate prompt directly from template data
       generatePromptContent();
       setIsGenerating(false);
       setShowAdvancedTips(true);
@@ -166,7 +166,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
 
   const handleGeneratePrompt = () => {
     if (!formData.objective.trim()) {
-      alert('Lütfen bir hedef girin!');
+      alert('Please enter an objective!');
       return;
     }
 
@@ -181,153 +181,153 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
   const generatePromptContent = () => {
     let prompt = '';
 
-    // 1) ROL & GÖREV
+    // 1) ROLE & TASK
     if (formData.domain) {
-      prompt += `# 1) ROL & GÖREV\nSen bir ${formData.domain} uzmanısın. `;
+      prompt += `# 1) ROLE & TASK\nYou are a ${formData.domain} expert. `;
     }
     if (formData.audience) {
-      prompt += `${formData.audience} seviyesindeki kullanıcılarla çalışmaya odaklanmış profesyonel bir danışmansın.\n`;
+      prompt += `You are a professional consultant focused on working with ${formData.audience} level users.\n`;
     }
-    prompt += `Temel görevin: ${formData.objective}\n\n`;
+    prompt += `Your main task: ${formData.objective}\n\n`;
 
-    // 2) BAĞLAM
-    prompt += `# 2) BAĞLAM\n`;
+    // 2) CONTEXT
+    prompt += `# 2) CONTEXT\n`;
     if (formData.context.trim()) {
       prompt += `${formData.context}\n`;
     } else {
-      prompt += `Mevcut durum ve özel koşullar dikkate alınacak.\n`;
+      prompt += `Current situation and special conditions will be considered.\n`;
     }
     prompt += `\n`;
 
-    // 3) HEDEF/ÇIKTI
-    prompt += `# 3) HEDEF/ÇIKTI\n`;
-    prompt += `Bu görevi tamamladığında kullanıcı şunlara sahip olacak:\n`;
-    prompt += `- Açık, uygulanabilir çözüm\n`;
-    prompt += `- Somut adım planı\n`;
-    prompt += `- Pratik örnekler ve öneriler\n\n`;
+    // 3) GOAL/OUTPUT
+    prompt += `# 3) GOAL/OUTPUT\n`;
+    prompt += `When this task is completed, the user will have:\n`;
+    prompt += `- Clear, actionable solution\n`;
+    prompt += `- Concrete step plan\n`;
+    prompt += `- Practical examples and suggestions\n\n`;
 
-    // 4) KISITLAR
-    prompt += `# 4) KISITLAR\n`;
-    prompt += `- Sadece doğrulanabilir bilgiler kullan\n`;
-    prompt += `- Belirsizlik varsa açıkça belirt\n`;
-    prompt += `- Yanıltıcı ya da spekülatif ifadeler kullanma\n`;
-    if (formData.audience === 'Başlangıç') {
-      prompt += `- Teknik jargon kullanma, basit dil tercih et\n`;
+    // 4) CONSTRAINTS
+    prompt += `# 4) CONSTRAINTS\n`;
+    prompt += `- Use only verifiable information\n`;
+    prompt += `- Clearly state if there is uncertainty\n`;
+    prompt += `- Don't use misleading or speculative statements\n`;
+    if (formData.audience === 'Beginner') {
+      prompt += `- Don't use technical jargon, prefer simple language\n`;
     }
     prompt += `\n`;
 
-    // 5) FORMAT & STİL
-    prompt += `# 5) FORMAT & STİL\n`;
+    // 5) FORMAT & STYLE
+    prompt += `# 5) FORMAT & STYLE\n`;
     if (formData.format) {
       prompt += `Format: ${formData.format}\n`;
     }
     if (formData.tone) {
-      prompt += `Ton: ${formData.tone}\n`;
+      prompt += `Tone: ${formData.tone}\n`;
     }
-    prompt += `- Her bölümü net başlıklar altında düzenle\n`;
-    prompt += `- Önemli noktaları vurgula\n`;
-    prompt += `- Okuma akışını kolaylaştır\n\n`;
+    prompt += `- Organize each section under clear headings\n`;
+    prompt += `- Highlight important points\n`;
+    prompt += `- Facilitate reading flow\n\n`;
 
-    // 6) METODOLOJİ
-    prompt += `# 6) METODOLOJİ\n`;
+    // 6) METHODOLOGY
+    prompt += `# 6) METHODOLOGY\n`;
     switch (formData.technique) {
       case 'CoT':
-        prompt += `Chain-of-Thought yaklaşımı kullan:\n`;
-        prompt += `- Her adımı açık şekilde göster\n`;
-        prompt += `- Mantıksal bağlantıları kurmaya özen göster\n`;
-        prompt += `- Düşünce sürecini şeffaf tut\n`;
+        prompt += `Use Chain-of-Thought approach:\n`;
+        prompt += `- Show each step clearly\n`;
+        prompt += `- Pay attention to establishing logical connections\n`;
+        prompt += `- Keep the thought process transparent\n`;
         break;
       case 'ToT':
-        prompt += `Tree-of-Thought yaklaşımı kullan:\n`;
-        prompt += `- Farklı çözüm yollarını değerlendir\n`;
-        prompt += `- Her seçeneğin artı/eksilerini göster\n`;
-        prompt += `- En uygun yolu gerekçeleriyle seç\n`;
+        prompt += `Use Tree-of-Thought approach:\n`;
+        prompt += `- Evaluate different solution paths\n`;
+        prompt += `- Show pros/cons of each option\n`;
+        prompt += `- Choose the most suitable path with justifications\n`;
         break;
       case 'FewShot':
-        prompt += `Few-Shot Learning yaklaşımı kullan:\n`;
-        prompt += `- 2-3 benzer örnek ver\n`;
-        prompt += `- Örneklerden çıkarılacak kuralları açıkla\n`;
-        prompt += `- Genelleştirilebilir kalıpları göster\n`;
+        prompt += `Use Few-Shot Learning approach:\n`;
+        prompt += `- Provide 2-3 similar examples\n`;
+        prompt += `- Explain rules to be derived from examples\n`;
+        prompt += `- Show generalizable patterns\n`;
         break;
       case 'RolePlay':
-        prompt += `Role-Playing yaklaşımı kullan:\n`;
-        prompt += `- ${formData.domain} uzmanı perspektifini koru\n`;
-        prompt += `- Sektörel terminoloji ve deneyimi yansıt\n`;
-        prompt += `- Profesyonel öngörülerini paylaş\n`;
+        prompt += `Use Role-Playing approach:\n`;
+        prompt += `- Maintain ${formData.domain} expert perspective\n`;
+        prompt += `- Reflect industry terminology and experience\n`;
+        prompt += `- Share professional insights\n`;
         break;
       case 'Meta':
-        prompt += `Meta-Prompting yaklaşımı kullan:\n`;
-        prompt += `- Büyük resmi ve stratejik boyutu değerlendir\n`;
-        prompt += `- Sistem düzeyinde düşün\n`;
-        prompt += `- Uzun vadeli etkilerini dikkate al\n`;
+        prompt += `Use Meta-Prompting approach:\n`;
+        prompt += `- Evaluate the big picture and strategic dimension\n`;
+        prompt += `- Think at system level\n`;
+        prompt += `- Consider long-term effects\n`;
         break;
       default:
-        prompt += `Sistematik yaklaşım kullan:\n`;
-        prompt += `- Problemi metodolojik olarak çöz\n`;
-        prompt += `- Kanıt temelli önerilerde bulun\n`;
+        prompt += `Use systematic approach:\n`;
+        prompt += `- Solve the problem methodologically\n`;
+        prompt += `- Make evidence-based recommendations\n`;
     }
     prompt += `\n`;
 
-    // 7) DOĞRULAMA & GÜVENLİK
-    prompt += `# 7) DOĞRULAMA & GÜVENLİK\n`;
-    prompt += `- Bilgi eksikliği varsa "Bu bilgiye erişimim yok." ile başla\n`;
-    prompt += `- Doğrulanamayan iddiaları [Doğrulanmamış] etiketiyle işaretle\n`;
-    prompt += `- Kesin ifadeler (garanti eder, asla, vs.) kullanmaktan kaçın\n`;
-    prompt += `- Tahminleri "[Tahmin]" notuyla belirt\n\n`;
+    // 7) VERIFICATION & SECURITY
+    prompt += `# 7) VERIFICATION & SECURITY\n`;
+    prompt += `- If information is missing, start with "I don't have access to this information."\n`;
+    prompt += `- Mark unverifiable claims with [Unverified] tag\n`;
+    prompt += `- Avoid using absolute statements (guarantees, never, etc.)\n`;
+    prompt += `- Mark predictions with "[Prediction]" note\n\n`;
 
-    // 8) İLERİ KONTROLLER
-    prompt += `# 8) İLERİ KONTROLLER\n`;
-    prompt += `- Yanıtın tutarlılığını kontrol et\n`;
-    prompt += `- Hedef kitleye uygunluğunu değerlendir\n`;
-    prompt += `- Eksik kalan noktaları "Netleştirme Gerekli" başlığında listele\n`;
-    prompt += `- Alternatif yaklaşımlar varsa kısaca değindir\n\n`;
+    // 8) ADVANCED CHECKS
+    prompt += `# 8) ADVANCED CHECKS\n`;
+    prompt += `- Check the consistency of the response\n`;
+    prompt += `- Evaluate suitability for target audience\n`;
+    prompt += `- List missing points under "Clarification Needed" heading\n`;
+    prompt += `- Briefly mention alternative approaches if available\n\n`;
 
-    // 9) DENEYSEL TEKNİKLER
-    prompt += `# 9) DENEYSEL TEKNİKLER\n`;
-    prompt += `- Yaratıcı çözüm önerilerini de dahil et\n`;
-    prompt += `- İnovatif yaklaşımları "[Deneysel]" etiketiyle işaretle\n`;
-    prompt += `- Gelecekteki gelişmeleri öngörmeye çalış\n\n`;
+    // 9) EXPERIMENTAL TECHNIQUES
+    prompt += `# 9) EXPERIMENTAL TECHNIQUES\n`;
+    prompt += `- Include creative solution suggestions\n`;
+    prompt += `- Mark innovative approaches with "[Experimental]" tag\n`;
+    prompt += `- Try to predict future developments\n\n`;
 
-    // 10) SON TEST/ÖZ-DEĞERLENDİRME
-    prompt += `# 10) SON TEST & ÖZ-DEĞERLENDİRME\n`;
-    prompt += `Yanıtını vermeden önce şunları kontrol et:\n`;
-    prompt += `✓ Hedef net şekilde karşılanmış mı?\n`;
-    prompt += `✓ Tüm kısıtlara uyulmuş mu?\n`;
-    prompt += `✓ Format ve stil gereksinimleri karşılanmış mı?\n`;
-    prompt += `✓ Doğrulama kriterleri uygulanmış mı?\n`;
-    prompt += `✓ Eksik bilgiler açıkça belirtilmiş mi?\n\n`;
+    // 10) FINAL TEST/SELF-EVALUATION
+    prompt += `# 10) FINAL TEST & SELF-EVALUATION\n`;
+    prompt += `Before giving your response, check the following:\n`;
+    prompt += `✓ Is the goal clearly met?\n`;
+    prompt += `✓ Are all constraints followed?\n`;
+    prompt += `✓ Are format and style requirements met?\n`;
+    prompt += `✓ Are verification criteria applied?\n`;
+    prompt += `✓ Are missing information clearly stated?\n\n`;
 
-    prompt += `ŞIMDI BU YAPIYI UYGULAYARAK YANIT VER.`;
+    prompt += `NOW APPLY THIS STRUCTURE AND RESPOND.`;
 
     setGeneratedPrompt(prompt);
   };
 
   const domains = [
-    'Yazılım Geliştirme', 'Pazarlama', 'Eğitim', 'Sağlık', 
-    'Finans', 'Analitik', 'Yaratıcı İçerik', 'İş Geliştirme'
+    'Software Development', 'Marketing', 'Education', 'Health', 
+    'Finance', 'Analytics', 'Creative Content', 'Business Development'
   ];
 
-  const audiences = ['Başlangıç', 'Orta', 'İleri', 'Uzman'];
+  const audiences = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
 
   const techniques = [
-    { id: 'CoT', name: 'Chain of Thought', desc: 'Adım adım düşünme' },
-    { id: 'ToT', name: 'Tree of Thought', desc: 'Çoklu çözüm ağacı' },
-    { id: 'FewShot', name: 'Few-Shot Learning', desc: 'Örneklerle öğrenme' },
-    { id: 'RolePlay', name: 'Role Playing', desc: 'Rol bazlı yaklaşım' },
-    { id: 'Meta', name: 'Meta Prompting', desc: 'Üst düzey strategi' }
+    { id: 'CoT', name: 'Chain of Thought', desc: 'Step-by-step thinking' },
+    { id: 'ToT', name: 'Tree of Thought', desc: 'Multiple solution tree' },
+    { id: 'FewShot', name: 'Few-Shot Learning', desc: 'Learning with examples' },
+    { id: 'RolePlay', name: 'Role Playing', desc: 'Role-based approach' },
+    { id: 'Meta', name: 'Meta Prompting', desc: 'High-level strategy' }
   ];
 
-  const formats = ['Madde listesi', 'Paragraf', 'Tablo', 'Kod', 'Adım adım rehber'];
-  const tones = ['Profesyonel', 'Samimi', 'Teknik', 'Eğitici', 'Yaratıcı'];
+  const formats = ['Bullet list', 'Paragraph', 'Table', 'Code', 'Step-by-step guide'];
+  const tones = ['Professional', 'Friendly', 'Technical', 'Educational', 'Creative'];
 
   const copyPrompt = async () => {
     if (!generatedPrompt) return;
     
     try {
       await navigator.clipboard.writeText(generatedPrompt);
-      alert('Prompt kopyalandı!');
+      alert('Prompt copied!');
     } catch (err) {
-      console.error('Kopyalama hatası:', err);
+      console.error('Copy error:', err);
     }
   };
 
@@ -359,25 +359,25 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
 
   const isFormComplete = formData.domain && formData.audience && formData.objective.trim();
 
-  // Form aktiflik takibi
+  // Form activity tracking
   const handleFormFocus = () => {
     setIsFormActive(true);
     setTimeout(() => setIsFormActive(false), 3000);
   };
   
-  // Akıllı öneri sistemi
+  // Smart suggestion system
   const getSmartSuggestion = () => {
     if (!formData.domain || !formData.objective.trim()) return null;
     
     const suggestions = {
-      'Yazılım Geliştirme': {
-        'web': 'React, Vue veya Angular framework tercihini belirtin',
-        'mobil': 'iOS (Swift) veya Android (Kotlin) platform seçin',
-        'api': 'REST, GraphQL veya gRPC protokol tercihini ekleyin'
+      'Software Development': {
+        'web': 'Specify React, Vue or Angular framework preference',
+        'mobile': 'Choose iOS (Swift) or Android (Kotlin) platform',
+        'api': 'Add REST, GraphQL or gRPC protocol preference'
       },
-      'Pazarlama': {
-        'kampanya': 'Hedef kitle demografisi ve bütçe aralığını belirtin',
-        'içerik': 'Platform (Instagram, LinkedIn, Blog) ve içerik türünü seçin'
+      'Marketing': {
+        'campaign': 'Specify target audience demographics and budget range',
+        'content': 'Choose platform (Instagram, LinkedIn, Blog) and content type'
       }
     };
     
@@ -394,114 +394,114 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
     return null;
   };
   
-  // Hızlı tamamlama önerisi
+  // Quick completion suggestion
   const getQuickCompletion = () => {
     const missing = [];
     if (!formData.domain) missing.push('Domain');
-    if (!formData.audience) missing.push('Hedef Kitle');
-    if (!formData.objective.trim()) missing.push('Hedef/Görev');
+    if (!formData.audience) missing.push('Target Audience');
+    if (!formData.objective.trim()) missing.push('Goal/Task');
     
-    return missing.length > 0 ? `Eksik: ${missing.join(', ')}` : 'Form tamamlandı! ✅';
+    return missing.length > 0 ? `Missing: ${missing.join(', ')}` : 'Form completed! ✅';
   };
 
-  // Dinamik ipuçları fonksiyonu
+  // Dynamic tips function
   const getDynamicTips = () => {
     const tips = [];
     
     if (generatedPrompt && showAdvancedTips) {
-      // Prompt oluşturulduktan sonra gösterilecek ipuçları
+      // Tips to show after prompt is generated
       const domainTips = {
-        'Yazılım Geliştirme': [
-          'Kod örnekleri için step-by-step açıklama isteyin',
-          'Test senaryoları ve hata ayıklama ipuçları ekleyin',
-          'Version control pratikleri belirtin'
+        'Software Development': [
+          'Request step-by-step explanations for code examples',
+          'Add test scenarios and debugging tips',
+          'Specify version control practices'
         ],
-        'Pazarlama': [
-          'Hedef kitle demografisi detaylarını ekleyin',
-          'ROI ölçütleri ve KPI\'ları belirtin',
-          'Platform-spesifik optimizasyon isteyin'
+        'Marketing': [
+          'Add target audience demographic details',
+          'Specify ROI metrics and KPIs',
+          'Request platform-specific optimization'
         ],
-        'Eğitim': [
-          'Öğrenme hedeflerini somut metriklerle tanımlayın',
-          'Yaş grubuna uygun dil seviyesi belirtin',
-          'İnteraktif aktivite örnekleri isteyin'
+        'Education': [
+          'Define learning objectives with concrete metrics',
+          'Specify age-appropriate language level',
+          'Request interactive activity examples'
         ],
-        'Sağlık': [
-          'Bilimsel kaynaklara referans isteyin',
-          'Güvenlik uyarılarını dahil edin',
-          'Profesyonel görüş almayı vurgulayın'
+        'Health': [
+          'Request references to scientific sources',
+          'Include safety warnings',
+          'Emphasize seeking professional opinion'
         ],
-        'Finans': [
-          'Risk değerlendirmesi kriterlerini ekleyin',
-          'Güncel piyasa verilerini referans alın',
-          'Yasal uyumluluk gereksinimlerini belirtin'
+        'Finance': [
+          'Add risk assessment criteria',
+          'Reference current market data',
+          'Specify legal compliance requirements'
         ],
-        'Sanat ve Tasarım': [
-          'Görsel referanslar ve örnekler isteyin',
-          'Stil kılavuzu ve brand identity belirtin',
-          'Teknik spesifikasyonlar ekleyin'
+        'Art and Design': [
+          'Request visual references and examples',
+          'Specify style guide and brand identity',
+          'Add technical specifications'
         ]
       };
 
       const techniqueTips = {
-        'Chain of Thought': 'Adım adım düşünme süreci için ara sonuçlar isteyin',
-        'Tree of Thought': 'Alternatif çözüm yolları için branch analizi ekleyin',
-        'Few-Shot Learning': 'Daha fazla örnek vererek pattern\'i güçlendirin',
-        'Zero-Shot': 'Bağlamsal ipuçlarını artırarak net talimatlar verin',
-        'Meta-Prompting': 'Prompt iyileştirme önerileri isteyin'
+        'Chain of Thought': 'Request intermediate results for step-by-step thinking process',
+        'Tree of Thought': 'Add branch analysis for alternative solution paths',
+        'Few-Shot Learning': 'Strengthen the pattern by providing more examples',
+        'Zero-Shot': 'Give clear instructions by increasing contextual clues',
+        'Meta-Prompting': 'Request prompt improvement suggestions'
       };
 
       tips.push({
-        category: 'Domain-Spesifik',
-        content: domainTips[formData.domain] || ['Bu domain için özel ipuçları hazırlanıyor...']
+        category: 'Domain-Specific',
+        content: domainTips[formData.domain] || ['Special tips for this domain are being prepared...']
       });
 
       if (formData.technique && techniqueTips[formData.technique]) {
         tips.push({
-          category: 'Teknik Optimizasyon',
+          category: 'Technical Optimization',
           content: [techniqueTips[formData.technique]]
         });
       }
 
       tips.push({
-        category: 'Sonraki Adımlar',
+        category: 'Next Steps',
         content: [
-          'Prompt\'ı farklı AI modellerinde test edin',
-          'Sonuçları iteratif olarak iyileştirin',
-          'Başarılı prompt\'ları kütüphanenize ekleyin'
+          'Test the prompt with different AI models',
+          'Iteratively improve the results',
+          'Add successful prompts to your library'
         ]
       });
 
       tips.push({
-        category: 'İleri Seviye',
+        category: 'Advanced',
         content: [
-          'Temperature ayarını sonuçlara göre optimize edin',
-          'Context window limitini göz önünde bulundurun',
-          'Modüleer prompt yapısı oluşturmayı deneyin'
+          'Optimize temperature setting based on results',
+          'Consider context window limits',
+          'Try creating modular prompt structure'
         ]
       });
 
     } else {
-      // Form doldurulurken gösterilecek temel ipuçları
+      // Basic tips to show while filling the form
       tips.push({
-        category: 'Başlangıç İpuçları',
+        category: 'Getting Started Tips',
         content: [
-          'Spesifik olun: "Web sitesi yap" yerine "E-ticaret web sitesi yap" deyin',
-          'Bağlam ekleyin: Özel durumlar ve kısıtlamalar belirtin',
-          'Teknik seçin: Her tekniğin kendine özgü avantajları var'
+          'Be specific: Say "E-commerce website" instead of "Make website"',
+          'Add context: Specify special conditions and constraints',
+          'Choose technique: Each technique has its own advantages'
         ]
       });
 
       if (formData.domain) {
         const domainSpecificTips = {
-          'Yazılım Geliştirme': ['Kullanılacak teknolojileri belirtin', 'Kod kalitesi kriterlerini ekleyin'],
-          'Pazarlama': ['Hedef kitleyi demografik olarak tanımlayın', 'Marka sesini belirtin'],
-          'Eğitim': ['Yaş grubunu ve seviyeyi belirtin', 'Öğrenme stilini göz önünde bulundurun']
+          'Software Development': ['Specify technologies to be used', 'Add code quality criteria'],
+          'Marketing': ['Define target audience demographically', 'Specify brand voice'],
+          'Education': ['Specify age group and level', 'Consider learning style']
         };
 
         if (domainSpecificTips[formData.domain]) {
           tips.push({
-            category: `${formData.domain} için Özel İpuçları`,
+            category: `Special Tips for ${formData.domain}`,
             content: domainSpecificTips[formData.domain]
           });
         }
@@ -511,7 +511,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
     return tips;
   };
 
-  // İpuçlarını yenileme fonksiyonu
+  // Refresh tips function
   const refreshTips = () => {
     setShowAdvancedTips(prev => !prev);
     setTimeout(() => setShowAdvancedTips(prev => !prev), 100);
@@ -523,7 +523,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
         <h1 className="text-4xl font-light text-white mb-2">
           <span className="nexus-gradient-text">Functional Prompt Builder</span>
         </h1>
-        <p className="text-gray-300">Gerçekten çalışan prompt'lar oluşturun</p>
+        <p className="text-gray-300">Create prompts that really work</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -532,7 +532,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Wand2 className="w-6 h-6" />
-              Prompt Parametreleri
+              Prompt Parameters
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -546,7 +546,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                 handleFormFocus();
               }}>
                 <SelectTrigger className="nexus-neon-card border-purple-400/30 transition-all duration-300 focus:border-purple-400/60">
-                  <SelectValue placeholder="Alan seçin" />
+                  <SelectValue placeholder="Select domain" />
                 </SelectTrigger>
                 <SelectContent className="nexus-select-content">
                   {domains.map(domain => (
@@ -559,14 +559,14 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             {/* Audience */}
             <div>
               <label className="block text-white font-medium mb-2">
-                Hedef Kitle *
+                Target Audience *
               </label>
               <Select value={formData.audience} onValueChange={(value) => {
                 setFormData({...formData, audience: value});
                 handleFormFocus();
               }}>
                 <SelectTrigger className="nexus-neon-card border-purple-400/30 transition-all duration-300 focus:border-purple-400/60">
-                  <SelectValue placeholder="Seviye seçin" />
+                  <SelectValue placeholder="Select level" />
                 </SelectTrigger>
                 <SelectContent className="nexus-select-content">
                   {audiences.map(audience => (
@@ -579,10 +579,10 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             {/* Objective */}
             <div>
               <label className="block text-white font-medium mb-2">
-                Hedef/Görev *
+                Goal/Task *
               </label>
               <Input
-                placeholder="Ne yapmak istiyorsunuz? (örn: Python ile web scraper yazmak)"
+                placeholder="What do you want to do? (e.g.: Write a web scraper with Python)"
                 value={formData.objective}
                 onChange={(e) => {
                   setFormData({...formData, objective: e.target.value});
@@ -596,7 +596,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             {/* Technique */}
             <div>
               <label className="block text-white font-medium mb-2">
-                Prompt Tekniği
+                Prompt Technique
               </label>
               <div className="grid grid-cols-1 gap-2">
                 {techniques.map(tech => (
@@ -631,10 +631,10 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             {/* Context */}
             <div>
               <label className="block text-white font-medium mb-2">
-                Ek Bağlam (Opsiyonel)
+                Additional Context (Optional)
               </label>
               <Textarea
-                placeholder="Özel durumlar, kısıtlamalar vs."
+                placeholder="Special conditions, constraints, etc."
                 value={formData.context}
                 onChange={(e) => {
                   setFormData({...formData, context: e.target.value});
@@ -665,13 +665,13 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
               </div>
 
               <div>
-                <label className="block text-white font-medium mb-2">Ton</label>
+                <label className="block text-white font-medium mb-2">Tone</label>
                 <Select value={formData.tone} onValueChange={(value) => {
                   setFormData({...formData, tone: value});
                   handleFormFocus();
                 }}>
                   <SelectTrigger className="nexus-neon-card border-purple-400/30 transition-all duration-300 focus:border-purple-400/60">
-                    <SelectValue placeholder="Ton" />
+                    <SelectValue placeholder="Tone" />
                   </SelectTrigger>
                   <SelectContent className="nexus-select-content">
                     {tones.map(tone => (
@@ -691,12 +691,12 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
               {isGenerating ? (
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Prompt Oluşturuluyor...
+                  Generating Prompt...
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
                   <Zap className="w-5 h-5" />
-                  Prompt Oluştur
+                  Generate Prompt
                   <ArrowRight className="w-5 h-5" />
                 </div>
               )}
@@ -709,7 +709,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Eye className="w-6 h-6" />
-              Oluşturulan Prompt
+              Generated Prompt
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -728,7 +728,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     className="flex-1 nexus-neon-card border-purple-400/50 text-white hover:bg-purple-500/10"
                   >
                     <Copy className="w-4 h-4 mr-2" />
-                    Kopyala
+                    Copy
                   </Button>
                   <Button 
                     onClick={downloadPrompt}
@@ -736,7 +736,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     className="flex-1 nexus-neon-card border-purple-400/50 text-white hover:bg-purple-500/10"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    İndir
+                    Download
                   </Button>
                 </div>
 
@@ -747,13 +747,13 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     className="nexus-neon-card border-orange-400/50 text-orange-300 hover:bg-orange-500/10 hover:text-orange-200"
                   >
                     <RefreshCw className="w-4 h-4 mr-2" />
-                    Temizle ve Yeniden Başla
+                    Clear and Start Over
                   </Button>
                 </div>
 
                 <div className="text-center">
                   <Badge variant="outline" className="text-green-400 border-green-400/50 bg-green-400/10">
-                    ✅ Prompt Hazır!
+                    ✅ Prompt Ready!
                   </Badge>
                 </div>
               </>
@@ -761,8 +761,8 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
               <div className="text-center py-16">
                 <div className="text-gray-400 mb-4">
                   <Wand2 className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                  <p>Prompt henüz oluşturulmadı</p>
-                  <p className="text-sm mt-2">Formu doldurup "Prompt Oluştur" butonuna tıklayın</p>
+                  <p>Prompt not generated yet</p>
+                  <p className="text-sm mt-2">Fill the form and click "Generate Prompt" button</p>
                 </div>
               </div>
             )}
@@ -778,16 +778,16 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             <h3 className="text-white font-semibold flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
-                💡 Akıllı Asistan İpuçları
+                💡 Smart Assistant Tips
               </div>
               {isFormActive && (
                 <Badge variant="outline" className="text-cyan-400 border-cyan-400/50 bg-cyan-400/10 text-xs animate-bounce">
-                  ⚡ Canlı
+                  ⚡ Live
                 </Badge>
               )}
               {completionProgress > 0 && (
                 <Badge variant="outline" className="text-emerald-400 border-emerald-400/50 bg-emerald-400/10 text-xs">
-                  %{completionProgress} Tamamlandı
+                  {completionProgress}% Complete
                 </Badge>
               )}
             </h3>
@@ -797,7 +797,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                   const suggestion = getSmartSuggestion();
                   if (suggestion) {
                     navigator.clipboard.writeText(suggestion);
-                    alert("Akıllı öneri kopyalandı!");
+                    alert("Smart suggestion copied!");
                   }
                 }}
                 disabled={!getSmartSuggestion()}
@@ -805,7 +805,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                 size="sm"
                 className="text-purple-400 hover:text-purple-300 nexus-hover-glow disabled:opacity-50"
               >
-                🎯 Akıllı Öneri
+                🎯 Smart Suggestion
               </Button>
               {generatedPrompt && (
                 <Button
@@ -815,7 +815,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                   className="text-blue-400 hover:text-blue-300 nexus-hover-glow"
                 >
                   <RefreshCw className="w-4 h-4 mr-1" />
-                  Yenile
+                  Refresh
                 </Button>
               )}
             </div>
@@ -825,7 +825,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
           {completionProgress > 0 && (
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-400">Form Tamamlanma</span>
+                <span className="text-sm text-gray-400">Form Completion</span>
                 <span className="text-sm text-white font-medium">{completionProgress}%</span>
               </div>
               <div className="w-full bg-gray-700/50 rounded-full h-2">
@@ -843,7 +843,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             <div className="mb-6">
               <h4 className="text-sm font-semibold text-cyan-300 mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
-                Gerçek Zamanlı Öneriler
+                Real-time Suggestions
               </h4>
               <div className="space-y-2">
                 {liveTips.map((tip, index) => (
@@ -872,18 +872,18 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
           {getSmartSuggestion() && (
             <div className="mb-6 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg p-4 border border-purple-400/30">
               <h4 className="text-sm font-semibold text-purple-300 mb-2 flex items-center gap-2">
-                🔮 Size Özel Öneri
+                🔮 Personalized Suggestion
               </h4>
               <p className="text-sm text-gray-300 mb-3">{getSmartSuggestion()}</p>
               <Button 
                 size="sm" 
                 onClick={() => {
                   navigator.clipboard.writeText(getSmartSuggestion());
-                  alert("Öneri kopyalandı!");
+                  alert("Suggestion copied!");
                 }}
                 className="text-xs bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 border border-purple-400/50"
               >
-                📋 Önerileri Kopyala
+                📋 Copy Suggestions
               </Button>
             </div>
           )}
@@ -902,7 +902,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     variant="ghost"
                     onClick={() => {
                       navigator.clipboard.writeText(tipGroup.content.join('\n• '));
-                      alert(`${tipGroup.category} ipuçları kopyalandı!`);
+                      alert(`${tipGroup.category} tips copied!`);
                     }}
                     className="text-xs text-purple-400 hover:text-purple-300 h-6 px-2"
                   >
@@ -925,19 +925,19 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
             <div className="mt-6 pt-4 border-t border-purple-400/20">
               <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg p-4 border border-purple-400/30">
                 <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                  🎯 Kişiselleştirilmiş Öneri
+                  🎯 Personalized Recommendation
                 </h4>
                 <p className="text-sm text-gray-300 leading-relaxed mb-4">
-                  {formData.domain === 'Yazılım Geliştirme' && formData.technique === 'Chain of Thought' && 
-                    "Kod yazma görevleri için Chain of Thought tekniği mükemmel! Her adımda ara sonuçları kontrol edin ve debug işlemini kolaylaştırın."}
-                  {formData.domain === 'Pazarlama' && formData.audience === 'Uzman' && 
-                    "Uzman seviyesindeki pazarlama profesyonelleri için teknik terimler ve KPI'lar kullanmaktan çekinmeyin."}
-                  {formData.domain === 'Eğitim' && formData.tone === 'casual' && 
-                    "Eğitim içerikleri için casual ton, öğrenci katılımını artırır. İnteraktif sorular eklemeyi unutmayın."}
-                  {!((formData.domain === 'Yazılım Geliştirme' && formData.technique === 'Chain of Thought') || 
-                     (formData.domain === 'Pazarlama' && formData.audience === 'Uzman') || 
-                     (formData.domain === 'Eğitim' && formData.tone === 'casual')) && 
-                    `${formData.domain} alanında ${formData.technique} tekniği kullanarak başarılı sonuçlar elde edebilirsiniz. Prompt'ınızı test edin ve iteratif olarak geliştirin.`}
+                  {formData.domain === 'Software Development' && formData.technique === 'CoT' && 
+                    "Chain of Thought technique is perfect for coding tasks! Check intermediate results at each step and facilitate debugging."}
+                  {formData.domain === 'Marketing' && formData.audience === 'Expert' && 
+                    "Don't hesitate to use technical terms and KPIs for expert-level marketing professionals."}
+                  {formData.domain === 'Education' && formData.tone === 'Friendly' && 
+                    "Friendly tone for educational content increases student engagement. Don't forget to add interactive questions."}
+                  {!((formData.domain === 'Software Development' && formData.technique === 'CoT') || 
+                     (formData.domain === 'Marketing' && formData.audience === 'Expert') || 
+                     (formData.domain === 'Education' && formData.tone === 'Friendly')) && 
+                    `You can achieve successful results using ${formData.technique} technique in ${formData.domain} field. Test your prompt and improve it iteratively.`}
                 </p>
                 
                 {/* Interactive Action Buttons */}
@@ -948,36 +948,36 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     variant="outline" 
                     className="text-xs nexus-neon-card border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/10 nexus-hover-glow"
                     onClick={() => {
-                      const improvedPrompt = generatedPrompt + "\n\n🚀 ENGELLENMİŞ İYİLEŞTİRME:\n- Çıktı örnekleri ekleyin\n- Edge case'leri belirtin\n- Doğrulama adımları tanımlayın\n- Iterasyon stratejisi ekleyin";
+                      const improvedPrompt = generatedPrompt + "\n\n🚀 ENHANCED IMPROVEMENT:\n- Add output examples\n- Specify edge cases\n- Define validation steps\n- Add iteration strategy";
                       navigator.clipboard.writeText(improvedPrompt);
-                      alert("Geliştirilmiş prompt kopyalandı!");
+                      alert("Enhanced prompt copied!");
                     }}
                   >
-                    ⚡ Süper İyileştir
+                    ⚡ Super Enhance
                   </Button>
                   <Button 
                     size="sm" 
                     variant="outline" 
                     className="text-xs nexus-neon-card border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/10 nexus-hover-glow"
                     onClick={() => {
-                      const testPrompt = `🧪 PROMPT TEST VERSİYONU:\n\n${generatedPrompt}\n\n--- TEST SORUSU ---\nLütfen bu prompt ile bir test çıktısı oluşturun ve aşağıdaki kriterlere göre değerlendirin:\n✓ Netlik (1-10)\n✓ Detay seviyesi (1-10)\n✓ Kullanışlılık (1-10)\n\nTEST SONUCU: [Bu bölümü doldurun]`;
+                      const testPrompt = `🧪 PROMPT TEST VERSION:\n\n${generatedPrompt}\n\n--- TEST QUESTION ---\nPlease create a test output with this prompt and evaluate based on the following criteria:\n✓ Clarity (1-10)\n✓ Level of detail (1-10)\n✓ Usability (1-10)\n\nTEST RESULT: [Fill this section]`;
                       navigator.clipboard.writeText(testPrompt);
-                      alert("Test versiyonu kopyalandı!");
+                      alert("Test version copied!");
                     }}
                   >
-                    🧪 Test Versiyonu
+                    🧪 Test Version
                   </Button>
                   <Button 
                     size="sm" 
                     variant="outline" 
                     className="text-xs nexus-neon-card border-green-400/50 text-green-300 hover:bg-green-500/10"
                     onClick={() => {
-                      const testPrompt = `TEST VERSİYONU:\n\n${generatedPrompt}\n\n📊 TEST SONUÇLARI:\n[ ] Açıklık\n[ ] Spesifiklik\n[ ] Çıktı Kalitesi\n[ ] Kullanılabilirlik`;
+                      const testPrompt = `TEST VERSION:\n\n${generatedPrompt}\n\n📊 TEST RESULTS:\n[ ] Clarity\n[ ] Specificity\n[ ] Output Quality\n[ ] Usability`;
                       navigator.clipboard.writeText(testPrompt);
-                      alert("Test versiyonu kopyalandı!");
+                      alert("Test version copied!");
                     }}
                   >
-                    🧪 Test Versiyonu
+                    🧪 Test Version
                   </Button>
                   <Button 
                     size="sm" 
@@ -985,7 +985,7 @@ export function FunctionalPromptBuilder({ selectedTemplate }: FunctionalPromptBu
                     className="text-xs nexus-neon-card border-purple-400/50 text-purple-300 hover:bg-purple-500/10"
                     onClick={refreshTips}
                   >
-                    🔄 Yeni İpuçları
+                    🔄 New Tips
                   </Button>
                 </div>
               </div>

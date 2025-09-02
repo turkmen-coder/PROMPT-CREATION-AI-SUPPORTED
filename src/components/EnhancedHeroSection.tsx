@@ -10,9 +10,9 @@ interface EnhancedHeroSectionProps {
 }
 
 const stats = [
-  { label: 'AI Şablonu', value: '50+', icon: '🤖', color: '#8B5CF6' },
-  { label: 'Prompt Tekniği', value: '10+', icon: '🧠', color: '#EC4899' },
-  { label: 'Kalite Skoru', value: '99%', icon: '⚡', color: '#10B981' }
+  { label: 'AI Templates', value: '50+', icon: '🤖', color: '#8B5CF6' },
+  { label: 'Prompt Techniques', value: '10+', icon: '🧠', color: '#EC4899' },
+  { label: 'Quality Score', value: '99%', icon: '⚡', color: '#10B981' }
 ];
 
 const animatedChips = [
@@ -49,8 +49,8 @@ export function EnhancedHeroSection({ onNavigate }: EnhancedHeroSectionProps) {
             <span className="text-white/80">ENGINEERING</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Gelişmiş AI Prompt Mühendisliği Platformu - Modern teknolojiler ve ileri düzey 
-            prompt stratejileri ile mükemmel kullanıcı deneyimi
+            Advanced AI Prompt Engineering Platform - Modern technologies and advanced 
+            prompt strategies with perfect user experience
           </p>
         </div>
 
@@ -105,7 +105,7 @@ export function EnhancedHeroSection({ onNavigate }: EnhancedHeroSectionProps) {
             onClick={() => onNavigate('builder')}
           >
             <Sparkles className="w-5 h-5 mr-2" />
-            Hemen Başla
+            Get Started
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
           
@@ -116,7 +116,7 @@ export function EnhancedHeroSection({ onNavigate }: EnhancedHeroSectionProps) {
             onClick={() => onNavigate('templates')}
           >
             <Code className="w-5 h-5 mr-2" />
-            Örnekleri İncele
+            View Examples
           </Button>
         </div>
 

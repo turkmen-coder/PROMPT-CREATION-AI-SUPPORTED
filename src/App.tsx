@@ -100,7 +100,7 @@ export default function App() {
                 : 'text-gray-300 hover:bg-purple-500/20 hover:text-white'
             }`}
           >
-            ⚙️ Ayarlar
+            ⚙️ Settings
           </button>
           <button
             onClick={() => setActiveTab('help')}
@@ -110,7 +110,7 @@ export default function App() {
                 : 'text-gray-300 hover:bg-purple-500/20 hover:text-white'
             }`}
           >
-            ❓ Yardım
+            ❓ Help
           </button>
         </nav>
       </div>
@@ -130,9 +130,9 @@ export default function App() {
             <div className="space-y-6">
               <div className="text-center mb-8">
                 <h1 className="text-3xl font-light mb-2 text-white">
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Template Seçici</span>
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Template Selector</span>
                 </h1>
-                <p className="text-gray-400">İhtiyacınıza uygun AI asistan rolünü seçin</p>
+                <p className="text-gray-400">Choose the AI assistant role that fits your needs</p>
               </div>
               <TemplateSelector onSelectTemplate={handleTemplateSelect} />
             </div>
@@ -159,16 +159,16 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-pink-500/5"></div>
         <div className="relative z-10">
           <div className="mb-6">
-            <h3 className="text-sm font-medium mb-2 text-white">NEXUS AI Model Ayarları</h3>
+            <h3 className="text-sm font-medium mb-2 text-white">NEXUS AI Model Settings</h3>
             <p className="text-xs text-gray-300 mb-4">
-              Claude Sonnet 4 ile güçlendirilmiş 
-              yapay zeka deneyimi. Gelişmiş 
-              muhakeme ve analiz yetenekleri.
+              Powered by Claude Sonnet 4 
+              AI experience. Advanced 
+              reasoning and analysis capabilities.
             </p>
           </div>
         
           <div className="mb-6">
-            <div className="text-xs text-white mb-2">Token Sayısı</div>
+            <div className="text-xs text-white mb-2">Token Count</div>
             <div className="text-right text-xs text-gray-300">0/200,000</div>
             <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
               <div className="bg-purple-500 h-2 rounded-full w-0"></div>
@@ -176,7 +176,7 @@ export default function App() {
           </div>
         
           <div className="mb-6">
-            <h4 className="text-sm mb-3 text-white">Yaratıcılık Seviyesi</h4>
+            <h4 className="text-sm mb-3 text-white">Creativity Level</h4>
             <Slider
               defaultValue={[1]}
               max={2}
@@ -185,61 +185,61 @@ export default function App() {
               className="w-full"
             />
             <div className="flex justify-between text-xs text-gray-300 mt-1">
-              <span>Tutarlı</span>
-              <span>Dengeli</span>
-              <span>Yaratıcı</span>
+              <span>Consistent</span>
+              <span>Balanced</span>
+              <span>Creative</span>
             </div>
           </div>
         
           <div className="mb-6">
-            <h4 className="text-sm mb-3 text-white">Aktif Template</h4>
+            <h4 className="text-sm mb-3 text-white">Active Template</h4>
             <div className="space-y-2 text-xs text-gray-300">
               {selectedTemplate ? (
                 <>
                   <div className="flex justify-between">
-                    <span>Rol:</span>
+                    <span>Role:</span>
                     <span className="text-purple-300">{selectedTemplate.role}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Tür:</span>
-                    <span>{selectedTemplate.taskType === 'analysis' ? 'Analiz' : 'Üretim'}</span>
+                    <span>Type:</span>
+                    <span>{selectedTemplate.taskType === 'analysis' ? 'Analysis' : 'Generation'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Ton:</span>
+                    <span>Tone:</span>
                     <span>{selectedTemplate.tone}</span>
                   </div>
                 </>
               ) : (
                 <div className="text-center py-4 text-gray-400">
-                  Template seçilmedi
+                  No template selected
                 </div>
               )}
             </div>
           </div>
         
           <div className="mb-6">
-            <h4 className="text-sm mb-3 text-white">Sistem Bilgileri</h4>
+            <h4 className="text-sm mb-3 text-white">System Information</h4>
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex justify-between">
                 <span>Model:</span>
                 <span>Claude Sonnet 4</span>
               </div>
               <div className="flex justify-between">
-                <span>Versiyon:</span>
+                <span>Version:</span>
                 <span>NEXUS v0.2.0</span>
               </div>
               <div className="flex justify-between">
-                <span>Durum:</span>
-                <span className="text-green-400">Aktif</span>
+                <span>Status:</span>
+                <span className="text-green-400">Active</span>
               </div>
             </div>
           </div>
         
           <div className="bg-purple-900/30 backdrop-blur rounded-lg p-4">
-            <div className="text-xs text-white mb-2">💡 İpucu</div>
+            <div className="text-xs text-white mb-2">💡 Tip</div>
             <div className="text-xs text-gray-300">
-              Template seçerek daha etkili ve 
-              profesyonel prompt'lar oluşturun.
+              Choose a template to create more effective 
+              and professional prompts.
             </div>
           </div>
         </div>
@@ -251,12 +251,12 @@ export default function App() {
           <div className="bg-purple-900/30 backdrop-blur rounded-lg p-3">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-white">Aktif Template</span>
+              <span className="text-sm text-white">Active Template</span>
             </div>
             <div className="text-purple-300 text-sm font-medium">{selectedTemplate.role}</div>
             <div className="flex gap-1 mt-2">
               <span className="bg-purple-500/20 px-2 py-1 rounded text-xs text-purple-300">
-                {selectedTemplate.taskType === 'analysis' ? 'Analiz' : 'Üretim'}
+                {selectedTemplate.taskType === 'analysis' ? 'Analysis' : 'Generation'}
               </span>
               <span className="bg-pink-500/20 px-2 py-1 rounded text-xs text-pink-300">
                 {selectedTemplate.tone}

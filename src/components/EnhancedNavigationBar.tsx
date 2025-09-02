@@ -31,35 +31,35 @@ interface EnhancedNavigationBarProps {
 const navigationItems: NavigationItem[] = [
   { 
     id: 'studio', 
-    label: 'Anasayfa', 
+    label: 'Home', 
     icon: Home, 
-    description: 'Ana kontrol paneli' 
+    description: 'Main control panel' 
   },
   { 
     id: 'builder', 
     label: 'Prompt Builder', 
     icon: Brain, 
     badge: 'v2.0',
-    description: '4 adımlı süreç' 
+    description: '4-step process' 
   },
   { 
     id: 'chat', 
     label: 'Chat', 
     icon: MessageSquare, 
     badge: 'NEW',
-    description: 'WhatsApp tarzı arayüz' 
+    description: 'WhatsApp-style interface' 
   },
   { 
     id: 'templates', 
-    label: 'Şablonlar', 
+    label: 'Templates', 
     icon: Wand2, 
-    description: 'Kart tabanlı sistem' 
+    description: 'Card-based system' 
   },
 ];
 
 const toolItems: NavigationItem[] = [
-  { id: 'settings', label: 'Ayarlar', icon: Settings },
-  { id: 'help', label: 'Yardım', icon: HelpCircle },
+  { id: 'settings', label: 'Settings', icon: Settings },
+  { id: 'help', label: 'Help', icon: HelpCircle },
 ];
 
 export function EnhancedNavigationBar({ activeTab, onTabChange, isMobile = false }: EnhancedNavigationBarProps) {
@@ -84,7 +84,7 @@ export function EnhancedNavigationBar({ activeTab, onTabChange, isMobile = false
       <div className="flex-1 px-4">
         <div className="space-y-2">
           <div className="text-xs font-medium text-gray-500 uppercase tracking-wider px-3 mb-3">
-            Prompt Mühendisliği
+            Prompt Engineering
           </div>
           
           {navigationItems.map((item) => (
@@ -133,7 +133,7 @@ export function EnhancedNavigationBar({ activeTab, onTabChange, isMobile = false
         {/* Tools Section */}
         <div className="mt-8 space-y-2">
           <div className="text-xs font-medium text-gray-500 uppercase tracking-wider px-3 mb-3">
-            Araçlar
+            Tools
           </div>
           
           {toolItems.map((item) => (
@@ -156,9 +156,9 @@ export function EnhancedNavigationBar({ activeTab, onTabChange, isMobile = false
       {/* Footer */}
       <div className="p-4 border-t border-gray-800">
         <div className="nexus-neon-card rounded-lg p-4 nexus-hover-glow">
-          <div className="text-xs text-gray-400 mb-1">💡 İpucu</div>
+          <div className="text-xs text-gray-400 mb-1">💡 Tip</div>
           <div className="text-xs text-gray-300">
-            Template seçerek daha etkili ve profesyonel prompt'lar oluşturun.
+            Choose a template to create more effective and professional prompts.
           </div>
         </div>
         

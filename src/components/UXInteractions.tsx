@@ -39,10 +39,10 @@ interface NotificationState {
 }
 
 const fabActions = [
-  { icon: <Chat size={20} />, name: 'Yeni Sohbet', action: 'chat' },
-  { icon: <Code size={20} />, name: 'Kod Analizi', action: 'code' },
-  { icon: <Image size={20} />, name: 'Görsel Analiz', action: 'image' },
-  { icon: <Settings size={20} />, name: 'Ayarlar', action: 'settings' },
+  { icon: <Chat size={20} />, name: 'New Chat', action: 'chat' },
+  { icon: <Code size={20} />, name: 'Code Analysis', action: 'code' },
+  { icon: <Image size={20} />, name: 'Visual Analysis', action: 'image' },
+  { icon: <Settings size={20} />, name: 'Settings', action: 'settings' },
 ];
 
 export const LoadingSkeletons: React.FC = () => {

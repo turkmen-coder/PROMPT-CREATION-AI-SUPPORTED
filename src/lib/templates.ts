@@ -14,31 +14,31 @@ export interface TemplateCategory {
 }
 
 export const TemplateCategories = {
-  // Teknik Roller
+  // Technical Roles
   technical: {
     linux_terminal: {
-      role: "Linux Terminal Uzmanı",
+      role: "Linux Terminal Expert",
       taskType: "analysis" as const,
-      task: "Terminal komutları çalıştırma ve sistem yönetimi",
-      context: "GNU/Linux, bash, sistem güvenliği, paket yönetimi",
+      task: "Terminal command execution and system management",
+      context: "GNU/Linux, bash, system security, package management",
       format: "text" as const,
       tone: "technical" as const,
-      constraints: "Güvenli komutlar, best practices"
+      constraints: "Secure commands, best practices"
     },
     js_console: {
       role: "JavaScript Developer",
       taskType: "creation" as const,
-      task: "Modern JavaScript kodu yazma ve debugging",
+      task: "Modern JavaScript code writing and debugging",
       context: "ES6+, async/await, DOM manipulation, Node.js",
       format: "text" as const,
       tone: "technical" as const,
-      constraints: "Performans, browser compatibility"
+      constraints: "Performance, browser compatibility"
     },
     software_engineer: {
       role: "Senior Software Engineer",
       taskType: "analysis" as const,
-      task: "Scalable uygulama mimarisi tasarımı",
-      context: "Mikroservisler, design patterns, SOLID principles",
+      task: "Scalable application architecture design",
+      context: "Microservices, design patterns, SOLID principles",
       format: "markdown" as const,
       tone: "technical" as const,
       constraints: "Maintainability, performance"
@@ -46,7 +46,7 @@ export const TemplateCategories = {
     ux_ui: {
       role: "UX/UI Designer",
       taskType: "analysis" as const,
-      task: "User-centered design ve interface optimization",
+      task: "User-centered design and interface optimization",
       context: "Design thinking, user research, accessibility",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -55,7 +55,7 @@ export const TemplateCategories = {
     security: {
       role: "Cybersecurity Specialist",
       taskType: "analysis" as const,
-      task: "Security audit ve penetration testing",
+      task: "Security audit and penetration testing",
       context: "OWASP Top 10, zero trust architecture",
       format: "markdown" as const,
       tone: "technical" as const,
@@ -64,7 +64,7 @@ export const TemplateCategories = {
     data_scientist: {
       role: "Data Scientist",
       taskType: "analysis" as const,
-      task: "Veri analizi ve machine learning modelleri",
+      task: "Data analysis and machine learning models",
       context: "Python, R, statistical modeling, ML algorithms",
       format: "markdown" as const,
       tone: "technical" as const,
@@ -73,7 +73,7 @@ export const TemplateCategories = {
     devops_engineer: {
       role: "DevOps Engineer",
       taskType: "creation" as const,
-      task: "CI/CD pipeline ve infrastructure automation",
+      task: "CI/CD pipeline and infrastructure automation",
       context: "Docker, Kubernetes, AWS/Azure, monitoring",
       format: "markdown" as const,
       tone: "technical" as const,
@@ -82,7 +82,7 @@ export const TemplateCategories = {
     python_developer: {
       role: "Python Developer",
       taskType: "creation" as const,
-      task: "Clean Python kodu yazma ve optimization",
+      task: "Clean Python code writing and optimization",
       context: "PEP8, virtual environments, testing",
       format: "text" as const,
       tone: "technical" as const,
@@ -91,7 +91,7 @@ export const TemplateCategories = {
     react_developer: {
       role: "React Developer",
       taskType: "creation" as const,
-      task: "Modern React uygulamaları geliştirme",
+      task: "Modern React application development",
       context: "Hooks, Context API, performance optimization",
       format: "text" as const,
       tone: "technical" as const,
@@ -100,7 +100,7 @@ export const TemplateCategories = {
     database_admin: {
       role: "Database Administrator",
       taskType: "analysis" as const,
-      task: "Database optimization ve performance tuning",
+      task: "Database optimization and performance tuning",
       context: "SQL, NoSQL, indexing strategies, backup",
       format: "markdown" as const,
       tone: "technical" as const,
@@ -108,12 +108,12 @@ export const TemplateCategories = {
     }
   },
 
-  // İş Dünyası
+  // Business World
   business: {
     ceo: {
       role: "CEO",
       taskType: "analysis" as const,
-      task: "Stratejik karar verme ve liderlik",
+      task: "Strategic decision making and leadership",
       context: "Company vision, market analysis, stakeholder management",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -131,7 +131,7 @@ export const TemplateCategories = {
     project_manager: {
       role: "Agile Project Manager",
       taskType: "analysis" as const,
-      task: "Agile project delivery ve team coordination",
+      task: "Agile project delivery and team coordination",
       context: "Scrum, Kanban, stakeholder management, risk mitigation",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -140,7 +140,7 @@ export const TemplateCategories = {
     business_analyst: {
       role: "Business Analyst",
       taskType: "analysis" as const,
-      task: "Business requirements ve process optimization",
+      task: "Business requirements and process optimization",
       context: "Requirements gathering, process mapping, stakeholder interviews",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -149,7 +149,7 @@ export const TemplateCategories = {
     sales_manager: {
       role: "Sales Manager",
       taskType: "creation" as const,
-      task: "Sales strategy ve customer relationship management",
+      task: "Sales strategy and customer relationship management",
       context: "CRM systems, sales funnel, lead qualification",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -158,7 +158,7 @@ export const TemplateCategories = {
     hr_specialist: {
       role: "HR Specialist",
       taskType: "analysis" as const,
-      task: "Talent management ve organizational development",
+      task: "Talent management and organizational development",
       context: "Recruitment, performance management, employee engagement",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -167,7 +167,7 @@ export const TemplateCategories = {
     financial_analyst: {
       role: "Financial Analyst",
       taskType: "analysis" as const,
-      task: "Financial modeling ve investment analysis",
+      task: "Financial modeling and investment analysis",
       context: "Financial statements, valuation models, risk assessment",
       format: "table" as const,
       tone: "professional" as const,
@@ -176,7 +176,7 @@ export const TemplateCategories = {
     product_manager: {
       role: "Product Manager",
       taskType: "analysis" as const,
-      task: "Product strategy ve roadmap planning",
+      task: "Product strategy and roadmap planning",
       context: "User research, market analysis, feature prioritization",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -185,7 +185,7 @@ export const TemplateCategories = {
     consultant: {
       role: "Management Consultant",
       taskType: "analysis" as const,
-      task: "Strategic consulting ve process improvement",
+      task: "Strategic consulting and process improvement",
       context: "Industry analysis, competitive benchmarking, change management",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -193,7 +193,7 @@ export const TemplateCategories = {
     }
   },
 
-  // Yaratıcı Sanatlar
+  // Creative Arts
   creative: {
     storyteller: {
       role: "Creative Storyteller",
@@ -207,7 +207,7 @@ export const TemplateCategories = {
     poet: {
       role: "Contemporary Poet",
       taskType: "creation" as const,
-      task: "Modern poetry ve lyrical expression",
+      task: "Modern poetry and lyrical expression",
       context: "Various forms, metaphor, rhythm, contemporary themes",
       format: "text" as const,
       tone: "creative" as const,
@@ -234,7 +234,7 @@ export const TemplateCategories = {
     screenwriter: {
       role: "Screenwriter",
       taskType: "creation" as const,
-      task: "Film ve TV script development",
+      task: "Film and TV script development",
       context: "Three-act structure, dialogue, visual storytelling",
       format: "text" as const,
       tone: "creative" as const,
@@ -243,7 +243,7 @@ export const TemplateCategories = {
     graphic_designer: {
       role: "Graphic Designer",
       taskType: "creation" as const,
-      task: "Visual communication ve brand design",
+      task: "Visual communication and brand design",
       context: "Typography, color theory, composition, brand guidelines",
       format: "markdown" as const,
       tone: "creative" as const,
@@ -252,7 +252,7 @@ export const TemplateCategories = {
     music_composer: {
       role: "Music Composer",
       taskType: "creation" as const,
-      task: "Original music composition ve arrangement",
+      task: "Original music composition and arrangement",
       context: "Music theory, instrumentation, genre conventions",
       format: "text" as const,
       tone: "creative" as const,
@@ -261,7 +261,7 @@ export const TemplateCategories = {
     game_designer: {
       role: "Game Designer",
       taskType: "creation" as const,
-      task: "Game mechanics ve player experience design",
+      task: "Game mechanics and player experience design",
       context: "Game theory, user psychology, balancing, monetization",
       format: "markdown" as const,
       tone: "creative" as const,
@@ -269,12 +269,12 @@ export const TemplateCategories = {
     }
   },
 
-  // Eğitim
+  // Education
   education: {
     teacher: {
       role: "Primary School Teacher",
       taskType: "creation" as const,
-      task: "Age-appropriate lesson planning ve student engagement",
+      task: "Age-appropriate lesson planning and student engagement",
       context: "Child development, learning styles, classroom management",
       format: "markdown" as const,
       tone: "casual" as const,
@@ -283,7 +283,7 @@ export const TemplateCategories = {
     professor: {
       role: "University Professor",
       taskType: "analysis" as const,
-      task: "Academic research ve higher education teaching",
+      task: "Academic research and higher education teaching",
       context: "Research methodology, peer review, academic writing",
       format: "academic" as const,
       tone: "academic" as const,
@@ -292,7 +292,7 @@ export const TemplateCategories = {
     tutor: {
       role: "Online Tutor",
       taskType: "creation" as const,
-      task: "Personalized learning ve skill development",
+      task: "Personalized learning and skill development",
       context: "Individual learning needs, progress tracking, motivation",
       format: "text" as const,
       tone: "casual" as const,
@@ -319,7 +319,7 @@ export const TemplateCategories = {
     math_tutor: {
       role: "Mathematics Tutor",
       taskType: "analysis" as const,
-      task: "Mathematical problem solving ve concept explanation",
+      task: "Mathematical problem solving and concept explanation",
       context: "Step-by-step methodology, common misconceptions, applications",
       format: "text" as const,
       tone: "technical" as const,
@@ -327,7 +327,7 @@ export const TemplateCategories = {
     }
   },
 
-  // Sağlık & Yaşam
+  // Health & Lifestyle
   health: {
     nutritionist: {
       role: "Clinical Nutritionist",
@@ -350,7 +350,7 @@ export const TemplateCategories = {
     psychologist: {
       role: "Clinical Psychologist",
       taskType: "analysis" as const,
-      task: "Mental health assessment ve therapeutic intervention",
+      task: "Mental health assessment and therapeutic intervention",
       context: "Psychological theories, assessment tools, treatment modalities",
       format: "markdown" as const,
       tone: "professional" as const,
@@ -368,7 +368,7 @@ export const TemplateCategories = {
     meditation_teacher: {
       role: "Mindfulness Teacher",
       taskType: "creation" as const,
-      task: "Meditation guidance ve mindfulness training",
+      task: "Meditation guidance and mindfulness training",
       context: "Various meditation techniques, stress reduction, self-awareness",
       format: "text" as const,
       tone: "casual" as const,
@@ -376,12 +376,12 @@ export const TemplateCategories = {
     }
   },
 
-  // Eğlence & Oyunlar
+  // Entertainment & Games
   entertainment: {
     game_master: {
       role: "Dungeon Master",
       taskType: "creation" as const,
-      task: "Interactive storytelling ve world building",
+      task: "Interactive storytelling and world building",
       context: "Fantasy settings, character development, plot hooks",
       format: "text" as const,
       tone: "creative" as const,

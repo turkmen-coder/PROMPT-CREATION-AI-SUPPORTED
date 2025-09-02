@@ -22,71 +22,71 @@ import {
 
 const faqItems = [
   {
-    question: "NEXUS AI Studio nedir?",
-    answer: "NEXUS AI Studio, gelişmiş prompt mühendisliği teknikleri kullanarak AI ile daha etkili iletişim kurmanızı sağlayan bir platformdur.",
-    category: "genel"
+    question: "What is NEXUS AI Studio?",
+    answer: "NEXUS AI Studio is a platform that enables more effective communication with AI using advanced prompt engineering techniques.",
+    category: "general"
   },
   {
-    question: "Hangi AI modelleri destekleniyor?",
-    answer: "Şu anda Gemini, Claude ve POE API'lerini destekliyoruz. Daha fazla model desteği yakında eklenecek.",
-    category: "teknik"
+    question: "Which AI models are supported?",
+    answer: "We currently support Gemini, Claude, and POE APIs. More model support will be added soon.",
+    category: "technical"
   },
   {
-    question: "Template'ler nasıl kullanılır?",
-    answer: "Template sekmesinden ihtiyacınıza uygun rolü seçin, ardından Prompt Builder'da özelleştirin.",
-    category: "kullanim"
+    question: "How to use templates?",
+    answer: "Select the role that suits your needs from the template tab, then customize it in the Prompt Builder.",
+    category: "usage"
   },
   {
-    question: "API anahtarlarım güvenli mi?",
-    answer: "API anahtarlarınız sadece tarayıcınızda yerel olarak saklanır ve hiçbir sunucuya gönderilmez.",
-    category: "guvenlik"
+    question: "Are my API keys secure?",
+    answer: "Your API keys are stored locally in your browser only and are not sent to any server.",
+    category: "security"
   },
   {
-    question: "Prompt Builder'da hangi teknikler var?",
-    answer: "Chain-of-Thought, Tree-of-Thought, Meta-Prompting, Few-Shot ve Zero-Shot Learning tekniklerini destekliyoruz.",
-    category: "teknik"
+    question: "What techniques are available in Prompt Builder?",
+    answer: "We support Chain-of-Thought, Tree-of-Thought, Meta-Prompting, Few-Shot, and Zero-Shot Learning techniques.",
+    category: "technical"
   }
 ];
 
 const tutorials = [
   {
-    title: "İlk Prompt'unuzu Oluşturun",
-    description: "Adım adım prompt builder kullanımı",
-    duration: "5 dk",
-    level: "Başlangıç",
+    title: "Create Your First Prompt",
+    description: "Step-by-step prompt builder usage",
+    duration: "5 min",
+    level: "Beginner",
     icon: Lightbulb
   },
   {
-    title: "Template Sistemi",
-    description: "Hazır template'leri nasıl kullanırım?",
-    duration: "3 dk", 
-    level: "Başlangıç",
+    title: "Template System",
+    description: "How to use ready-made templates?",
+    duration: "3 min", 
+    level: "Beginner",
     icon: Book
   },
   {
-    title: "Gelişmiş Prompt Teknikleri",
-    description: "CoT, ToT ve Meta-Prompting",
-    duration: "12 dk",
-    level: "İleri",
+    title: "Advanced Prompt Techniques",
+    description: "CoT, ToT and Meta-Prompting",
+    duration: "12 min",
+    level: "Advanced",
     icon: Code
   },
   {
-    title: "API Entegrasyonu",
-    description: "Kendi API anahtarlarınızı ayarlayın",
-    duration: "7 dk",
-    level: "Orta",
+    title: "API Integration",
+    description: "Set up your own API keys",
+    duration: "7 min",
+    level: "Intermediate",
     icon: Zap
   }
 ];
 
 export function Help() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('hepsi');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const filteredFAQ = faqItems.filter(item => {
     const matchesSearch = item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.answer.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'hepsi' || item.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -95,37 +95,37 @@ export function Help() {
       <div className="mb-8">
         <h1 className="text-3xl font-light text-white mb-2 flex items-center gap-3">
           <HelpCircle className="w-8 h-8" />
-          Yardım & Destek
+          Help & Support
         </h1>
-        <p className="text-gray-400">NEXUS AI Studio kullanımı için rehber ve destek</p>
+        <p className="text-gray-400">Guide and support for using NEXUS AI Studio</p>
       </div>
 
       <Tabs defaultValue="faq" className="w-full">
         <TabsList className="grid w-full grid-cols-4 bg-white/5">
           <TabsTrigger value="faq" className="data-[state=active]:bg-purple-500/20">
             <HelpCircle className="w-4 h-4 mr-2" />
-            SSS
+            FAQ
           </TabsTrigger>
           <TabsTrigger value="tutorials" className="data-[state=active]:bg-purple-500/20">
             <Video className="w-4 h-4 mr-2" />
-            Eğitimler
+            Tutorials
           </TabsTrigger>
           <TabsTrigger value="docs" className="data-[state=active]:bg-purple-500/20">
             <Book className="w-4 h-4 mr-2" />
-            Belgeler
+            Documents
           </TabsTrigger>
           <TabsTrigger value="contact" className="data-[state=active]:bg-purple-500/20">
             <MessageSquare className="w-4 h-4 mr-2" />
-            İletişim
+            Contact
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="faq" className="space-y-6">
           <Card className="bg-white/5 border-gray-600">
             <CardHeader>
-              <CardTitle className="text-white">Sıkça Sorulan Sorular</CardTitle>
+              <CardTitle className="text-white">Frequently Asked Questions</CardTitle>
               <CardDescription>
-                En yaygın sorular ve yanıtları
+                Most common questions and answers
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -133,7 +133,7 @@ export function Help() {
               <div className="relative">
                 <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
-                  placeholder="Sorularda ara..."
+                  placeholder="Search questions..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 bg-white/5 border-gray-600"
@@ -142,7 +142,7 @@ export function Help() {
 
               {/* Category Filter */}
               <div className="flex gap-2 flex-wrap">
-                {['hepsi', 'genel', 'teknik', 'kullanim', 'guvenlik'].map(category => (
+                {['all', 'general', 'technical', 'usage', 'security'].map(category => (
                   <Button
                     key={category}
                     variant={selectedCategory === category ? "default" : "outline"}
@@ -150,11 +150,11 @@ export function Help() {
                     onClick={() => setSelectedCategory(category)}
                     className={selectedCategory === category ? "bg-purple-600" : ""}
                   >
-                    {category === 'hepsi' ? 'Hepsi' :
-                     category === 'genel' ? 'Genel' :
-                     category === 'teknik' ? 'Teknik' :
-                     category === 'kullanim' ? 'Kullanım' :
-                     'Güvenlik'}
+                    {category === 'all' ? 'All' :
+                     category === 'general' ? 'General' :
+                     category === 'technical' ? 'Technical' :
+                     category === 'usage' ? 'Usage' :
+                     'Security'}
                   </Button>
                 ))}
               </div>
@@ -180,7 +180,7 @@ export function Help() {
 
               {filteredFAQ.length === 0 && (
                 <div className="text-center py-8">
-                  <p className="text-gray-400">Arama kriterlerinize uygun soru bulunamadı.</p>
+                  <p className="text-gray-400">No questions found matching your search criteria.</p>
                 </div>
               )}
             </CardContent>
@@ -217,11 +217,11 @@ export function Help() {
             <Card className="bg-white/5 border-gray-600 hover:bg-white/10 transition-all cursor-pointer">
               <CardContent className="p-6">
                 <Book className="w-8 h-8 text-purple-400 mb-4" />
-                <h3 className="font-semibold text-white mb-2">API Belgeleri</h3>
-                <p className="text-gray-400 text-sm mb-4">API endpoint'leri ve kullanım örnekleri</p>
+                <h3 className="font-semibold text-white mb-2">API Documentation</h3>
+                <p className="text-gray-400 text-sm mb-4">API endpoints and usage examples</p>
                 <Button variant="outline" size="sm" className="w-full">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  Belgelerimizi Görüntüle
+                  View Documentation
                 </Button>
               </CardContent>
             </Card>
@@ -229,11 +229,11 @@ export function Help() {
             <Card className="bg-white/5 border-gray-600 hover:bg-white/10 transition-all cursor-pointer">
               <CardContent className="p-6">
                 <Code className="w-8 h-8 text-blue-400 mb-4" />
-                <h3 className="font-semibold text-white mb-2">Örnek Kodlar</h3>
-                <p className="text-gray-400 text-sm mb-4">Hazır prompt örnekleri ve şablonları</p>
+                <h3 className="font-semibold text-white mb-2">Sample Code</h3>
+                <p className="text-gray-400 text-sm mb-4">Ready-made prompt examples and templates</p>
                 <Button variant="outline" size="sm" className="w-full">
                   <Github className="w-4 h-4 mr-2" />
-                  GitHub'da İncele
+                  View on GitHub
                 </Button>
               </CardContent>
             </Card>
@@ -241,11 +241,11 @@ export function Help() {
             <Card className="bg-white/5 border-gray-600 hover:bg-white/10 transition-all cursor-pointer">
               <CardContent className="p-6">
                 <Lightbulb className="w-8 h-8 text-yellow-400 mb-4" />
-                <h3 className="font-semibold text-white mb-2">En İyi Practices</h3>
-                <p className="text-gray-400 text-sm mb-4">Etkili prompt yazımı için ipuçları</p>
+                <h3 className="font-semibold text-white mb-2">Best Practices</h3>
+                <p className="text-gray-400 text-sm mb-4">Tips for effective prompt writing</p>
                 <Button variant="outline" size="sm" className="w-full">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  Rehberi Oku
+                  Read Guide
                 </Button>
               </CardContent>
             </Card>
@@ -258,10 +258,10 @@ export function Help() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Mail className="w-5 h-5" />
-                  Bize Ulaşın
+                  Contact Us
                 </CardTitle>
                 <CardDescription>
-                  Sorularınız için bizimle iletişime geçin
+                  Get in touch with us for your questions
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -270,12 +270,12 @@ export function Help() {
                   <p className="text-purple-400">support@nexusai.studio</p>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-300 mb-2 block">Destek</label>
-                  <p className="text-gray-400">7/24 online destek</p>
+                  <label className="text-sm font-medium text-gray-300 mb-2 block">Support</label>
+                  <p className="text-gray-400">24/7 online support</p>
                 </div>
                 <Button className="w-full bg-purple-600 hover:bg-purple-700">
                   <Mail className="w-4 h-4 mr-2" />
-                  Email Gönder
+                  Send Email
                 </Button>
               </CardContent>
             </Card>
@@ -284,16 +284,16 @@ export function Help() {
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   <Heart className="w-5 h-5" />
-                  Topluluk
+                  Community
                 </CardTitle>
                 <CardDescription>
-                  NEXUS AI Studio topluluğuna katılın
+                  Join the NEXUS AI Studio community
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button variant="outline" className="w-full">
                   <MessageSquare className="w-4 h-4 mr-2" />
-                  Discord Topluluğu
+                  Discord Community
                 </Button>
                 <Button variant="outline" className="w-full">
                   <Github className="w-4 h-4 mr-2" />
@@ -301,7 +301,7 @@ export function Help() {
                 </Button>
                 <Button variant="outline" className="w-full">
                   <ExternalLink className="w-4 h-4 mr-2" />
-                  Blog & Güncellemeler
+                  Blog & Updates
                 </Button>
               </CardContent>
             </Card>
