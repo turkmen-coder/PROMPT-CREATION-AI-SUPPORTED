@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* NEXUS AI Studio Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #1a1b3e, #2d1b69, #8b5cf6);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* NEXUS Custom Classes */
+.nexus-gradient-text {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nexus-neon-card {
+  background: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.nexus-glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nexus-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.nexus-hover-glow:hover {
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.4);
+  transform: translateY(-2px);
+}
+
+.nexus-floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Radix UI Overrides for NEXUS Theme */
+[data-radix-select-content] {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.95) 0%, rgba(236, 72, 153, 0.9) 100%) !important;
+  border: 1px solid rgba(147, 51, 234, 0.5) !important;
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.4) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+[data-radix-select-item] {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-radix-select-item]:hover,
+[data-radix-select-item][data-highlighted] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  outline: none !important;
+}
+
+[data-radix-select-item][data-state="checked"] {
+  background: rgba(147, 51, 234, 0.3) !important;
+  color: #c084fc !important;
+}
+
+.nexus-select-content {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.95) 0%, rgba(236, 72, 153, 0.9) 100%) !important;
+  border: 1px solid rgba(147, 51, 234, 0.5) !important;
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.4) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.nexus-select-item {
+  color: white !important;
+  transition: all 0.2s ease !important;
+}
+
+.nexus-select-item:hover,
+.nexus-select-item[data-highlighted] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: white !important;
+  outline: none !important;
+}
+
+/* Animation Classes */
+.chat-message {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.template-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.3);
+}
